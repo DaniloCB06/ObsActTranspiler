@@ -4,9 +4,11 @@ import ply.lex as lex
 tokens = (
     'DISPOSITIVO','SET','SE','ENTAO','SENAO','ENVIAR','ALERTA',
     'PARA','TODOS',
+    'COLON',
     'LBRACE','RBRACE','LPAREN','RPAREN','COMMA','DOT',
-    'AND','OPLOGIC',
-    'NUMBER','BOOL','MSG','NAME'
+    'AND','OPLOGIC','EQUAL',
+    'NUMBER','BOOL','MSG','NAME',
+    'LIGAR','DESLIGAR'
 )
 
 # 2) regex para tokens fixos / literais
@@ -19,19 +21,24 @@ t_ENVIAR      = r'enviar'
 t_ALERTA      = r'alerta'
 t_PARA        = r'para'
 t_TODOS       = r'todos'
+t_LIGAR       = r'ligar'
+t_DESLIGAR    = r'desligar'
+
 t_LBRACE      = r'\{'
 t_RBRACE      = r'\}'
 t_LPAREN      = r'\('
 t_RPAREN      = r'\)'
 t_COMMA       = r','
 t_DOT         = r'\.'
+t_COLON       = r':'
 t_AND         = r'&&'
 t_OPLOGIC     = r'<=|>=|==|!=|<|>'
+t_EQUAL       = r'='
 
-# 3) tokens com algum processamento
+# 3) tokens com processamento
 def t_MSG(t):
     r'\"([^"]*)\"'
-    t.value = t.value[1:-1]  # retira as aspas
+    t.value = t.value[1:-1]
     return t
 
 def t_BOOL(t):

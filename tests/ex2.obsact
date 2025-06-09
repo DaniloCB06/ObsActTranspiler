@@ -2,5 +2,5 @@ dispositivo : {door, status}
 dispositivo : {fan, speed}
 set status = True.
 set speed = 10.
-se speed >= 10 && status == True então ligar fan.
+se speed >= 10 && status == True entao ligar fan.
 enviar alerta("Teste broadcast") para todos: door, fan.
