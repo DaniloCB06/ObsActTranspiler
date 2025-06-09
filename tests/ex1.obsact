@@ -1,0 +1,3 @@
+dispositivo : {lamp1, temperature}
+set temperature = 30.
+se temperature > 25 então enviar alerta("Temperatura alta", temperature) lamp1.
