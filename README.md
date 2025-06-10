@@ -67,14 +67,14 @@ pip install ply
 
 
 ObsActTranspiler/
-├── main.py                    # Entry point and command-line interface
-├── parser/                    # Lexer and parser modules
-│   ├── obsact\_lexer.py        # Token definitions
-│   └── obsact\_parser.py       # Grammar and code generation
-├── tests/                     # Sample .obsact programs
-│   ├── ex1.obsact             # Example 1
-│   └── ex2.obsact             # Example 2
-└── README.md                  # This file
+├── main.py                    # Entry point and command-line interface<br>
+├── parser/                    # Lexer and parser modules<br>
+│   ├── obsact\_lexer.py        # Token definitions<br>
+│   └── obsact\_parser.py       # Grammar and code generation<br>
+├── tests/                     # Sample .obsact programs<br>
+│   ├── ex1.obsact             # Example 1<br>
+│   └── ex2.obsact             # Example 2<br>
+└── README.md                  # This file<br>
 
 
 
