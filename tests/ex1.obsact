@@ -1,3 +1,6 @@
-dispositivo : {lamp1, temperature}
-set temperature = 30.
-se temperature > 25 entao enviar alerta("Temperatura alta", temperature) lamp1.
+dispositivo { monitor }
+dispositivo : { celular }
+dispositivo : { Termometro , temperatura }
+se temperatura > 30 entao .
+enviar alerta (" Temperatura em " , temperatura ) para todos :
+    monitor , celular .

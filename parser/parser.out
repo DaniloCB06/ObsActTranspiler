@@ -1,0 +1,878 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> devices cmds
+Rule 2     devices -> device
+Rule 3     devices -> devices device
+Rule 4     device -> DISPOSITIVO LBRACE NAME RBRACE
+Rule 5     device -> DISPOSITIVO LBRACE NAME COMMA NAME RBRACE
+Rule 6     device -> DISPOSITIVO COLON LBRACE NAME RBRACE
+Rule 7     device -> DISPOSITIVO COLON LBRACE NAME COMMA NAME RBRACE
+Rule 8     cmds -> cmd DOT
+Rule 9     cmds -> cmds cmd DOT
+Rule 10    cmd -> attrib
+Rule 11    cmd -> obsact
+Rule 12    cmd -> act
+Rule 13    cmd -> broadcast
+Rule 14    attrib -> SET NAME EQUAL var
+Rule 15    var -> NUMBER
+Rule 16    var -> BOOL
+Rule 17    var -> NAME
+Rule 18    obsact -> SE condition ENTAO
+Rule 19    obsact -> SE condition ENTAO act
+Rule 20    obsact -> SE condition ENTAO act SENAO act
+Rule 21    condition -> expression
+Rule 22    expression -> NAME OPLOGIC var
+Rule 23    expression -> expression AND expression
+Rule 24    act -> LIGAR NAME
+Rule 25    act -> DESLIGAR NAME
+Rule 26    act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA NAME
+Rule 27    act -> ENVIAR ALERTA LPAREN MSG RPAREN PARA NAME
+Rule 28    broadcast -> ENVIAR ALERTA LPAREN MSG RPAREN PARA TODOS COLON name_list
+Rule 29    broadcast -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA TODOS COLON name_list
+Rule 30    name_list -> NAME
+Rule 31    name_list -> name_list COMMA NAME
+
+Terminals, with rules where they appear
+
+ALERTA               : 26 27 28 29
+AND                  : 23
+BOOL                 : 16
+COLON                : 6 7 28 29
+COMMA                : 5 7 26 29 31
+DESLIGAR             : 25
+DISPOSITIVO          : 4 5 6 7
+DOT                  : 8 9
+ENTAO                : 18 19 20
+ENVIAR               : 26 27 28 29
+EQUAL                : 14
+LBRACE               : 4 5 6 7
+LIGAR                : 24
+LPAREN               : 26 27 28 29
+MSG                  : 26 27 28 29
+NAME                 : 4 5 5 6 7 7 14 17 22 24 25 26 26 27 29 30 31
+NUMBER               : 15
+OPLOGIC              : 22
+PARA                 : 26 27 28 29
+RBRACE               : 4 5 6 7
+RPAREN               : 26 27 28 29
+SE                   : 18 19 20
+SENAO                : 20
+SET                  : 14
+TODOS                : 28 29
+error                : 
+
+Nonterminals, with rules where they appear
+
+act                  : 12 19 20 20
+attrib               : 10
+broadcast            : 13
+cmd                  : 8 9
+cmds                 : 1 9
+condition            : 18 19 20
+device               : 2 3
+devices              : 1 3
+expression           : 21 23 23
+name_list            : 28 29 31
+obsact               : 11
+program              : 0
+var                  : 14 22
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . devices cmds
+    (2) devices -> . device
+    (3) devices -> . devices device
+    (4) device -> . DISPOSITIVO LBRACE NAME RBRACE
+    (5) device -> . DISPOSITIVO LBRACE NAME COMMA NAME RBRACE
+    (6) device -> . DISPOSITIVO COLON LBRACE NAME RBRACE
+    (7) device -> . DISPOSITIVO COLON LBRACE NAME COMMA NAME RBRACE
+
+    DISPOSITIVO     shift and go to state 4
+
+    program                        shift and go to state 1
+    devices                        shift and go to state 2
+    device                         shift and go to state 3
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> devices . cmds
+    (3) devices -> devices . device
+    (8) cmds -> . cmd DOT
+    (9) cmds -> . cmds cmd DOT
+    (4) device -> . DISPOSITIVO LBRACE NAME RBRACE
+    (5) device -> . DISPOSITIVO LBRACE NAME COMMA NAME RBRACE
+    (6) device -> . DISPOSITIVO COLON LBRACE NAME RBRACE
+    (7) device -> . DISPOSITIVO COLON LBRACE NAME COMMA NAME RBRACE
+    (10) cmd -> . attrib
+    (11) cmd -> . obsact
+    (12) cmd -> . act
+    (13) cmd -> . broadcast
+    (14) attrib -> . SET NAME EQUAL var
+    (18) obsact -> . SE condition ENTAO
+    (19) obsact -> . SE condition ENTAO act
+    (20) obsact -> . SE condition ENTAO act SENAO act
+    (24) act -> . LIGAR NAME
+    (25) act -> . DESLIGAR NAME
+    (26) act -> . ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA NAME
+    (27) act -> . ENVIAR ALERTA LPAREN MSG RPAREN PARA NAME
+    (28) broadcast -> . ENVIAR ALERTA LPAREN MSG RPAREN PARA TODOS COLON name_list
+    (29) broadcast -> . ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA TODOS COLON name_list
+
+    DISPOSITIVO     shift and go to state 4
+    SET             shift and go to state 12
+    SE              shift and go to state 13
+    LIGAR           shift and go to state 14
+    DESLIGAR        shift and go to state 15
+    ENVIAR          shift and go to state 16
+
+    cmds                           shift and go to state 5
+    device                         shift and go to state 6
+    cmd                            shift and go to state 7
+    attrib                         shift and go to state 8
+    obsact                         shift and go to state 9
+    act                            shift and go to state 10
+    broadcast                      shift and go to state 11
+
+state 3
+
+    (2) devices -> device .
+
+    DISPOSITIVO     reduce using rule 2 (devices -> device .)
+    SET             reduce using rule 2 (devices -> device .)
+    SE              reduce using rule 2 (devices -> device .)
+    LIGAR           reduce using rule 2 (devices -> device .)
+    DESLIGAR        reduce using rule 2 (devices -> device .)
+    ENVIAR          reduce using rule 2 (devices -> device .)
+
+
+state 4
+
+    (4) device -> DISPOSITIVO . LBRACE NAME RBRACE
+    (5) device -> DISPOSITIVO . LBRACE NAME COMMA NAME RBRACE
+    (6) device -> DISPOSITIVO . COLON LBRACE NAME RBRACE
+    (7) device -> DISPOSITIVO . COLON LBRACE NAME COMMA NAME RBRACE
+
+    LBRACE          shift and go to state 17
+    COLON           shift and go to state 18
+
+
+state 5
+
+    (1) program -> devices cmds .
+    (9) cmds -> cmds . cmd DOT
+    (10) cmd -> . attrib
+    (11) cmd -> . obsact
+    (12) cmd -> . act
+    (13) cmd -> . broadcast
+    (14) attrib -> . SET NAME EQUAL var
+    (18) obsact -> . SE condition ENTAO
+    (19) obsact -> . SE condition ENTAO act
+    (20) obsact -> . SE condition ENTAO act SENAO act
+    (24) act -> . LIGAR NAME
+    (25) act -> . DESLIGAR NAME
+    (26) act -> . ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA NAME
+    (27) act -> . ENVIAR ALERTA LPAREN MSG RPAREN PARA NAME
+    (28) broadcast -> . ENVIAR ALERTA LPAREN MSG RPAREN PARA TODOS COLON name_list
+    (29) broadcast -> . ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA TODOS COLON name_list
+
+    $end            reduce using rule 1 (program -> devices cmds .)
+    SET             shift and go to state 12
+    SE              shift and go to state 13
+    LIGAR           shift and go to state 14
+    DESLIGAR        shift and go to state 15
+    ENVIAR          shift and go to state 16
+
+    cmd                            shift and go to state 19
+    attrib                         shift and go to state 8
+    obsact                         shift and go to state 9
+    act                            shift and go to state 10
+    broadcast                      shift and go to state 11
+
+state 6
+
+    (3) devices -> devices device .
+
+    DISPOSITIVO     reduce using rule 3 (devices -> devices device .)
+    SET             reduce using rule 3 (devices -> devices device .)
+    SE              reduce using rule 3 (devices -> devices device .)
+    LIGAR           reduce using rule 3 (devices -> devices device .)
+    DESLIGAR        reduce using rule 3 (devices -> devices device .)
+    ENVIAR          reduce using rule 3 (devices -> devices device .)
+
+
+state 7
+
+    (8) cmds -> cmd . DOT
+
+    DOT             shift and go to state 20
+
+
+state 8
+
+    (10) cmd -> attrib .
+
+    DOT             reduce using rule 10 (cmd -> attrib .)
+
+
+state 9
+
+    (11) cmd -> obsact .
+
+    DOT             reduce using rule 11 (cmd -> obsact .)
+
+
+state 10
+
+    (12) cmd -> act .
+
+    DOT             reduce using rule 12 (cmd -> act .)
+
+
+state 11
+
+    (13) cmd -> broadcast .
+
+    DOT             reduce using rule 13 (cmd -> broadcast .)
+
+
+state 12
+
+    (14) attrib -> SET . NAME EQUAL var
+
+    NAME            shift and go to state 21
+
+
+state 13
+
+    (18) obsact -> SE . condition ENTAO
+    (19) obsact -> SE . condition ENTAO act
+    (20) obsact -> SE . condition ENTAO act SENAO act
+    (21) condition -> . expression
+    (22) expression -> . NAME OPLOGIC var
+    (23) expression -> . expression AND expression
+
+    NAME            shift and go to state 24
+
+    condition                      shift and go to state 22
+    expression                     shift and go to state 23
+
+state 14
+
+    (24) act -> LIGAR . NAME
+
+    NAME            shift and go to state 25
+
+
+state 15
+
+    (25) act -> DESLIGAR . NAME
+
+    NAME            shift and go to state 26
+
+
+state 16
+
+    (26) act -> ENVIAR . ALERTA LPAREN MSG COMMA NAME RPAREN PARA NAME
+    (27) act -> ENVIAR . ALERTA LPAREN MSG RPAREN PARA NAME
+    (28) broadcast -> ENVIAR . ALERTA LPAREN MSG RPAREN PARA TODOS COLON name_list
+    (29) broadcast -> ENVIAR . ALERTA LPAREN MSG COMMA NAME RPAREN PARA TODOS COLON name_list
+
+    ALERTA          shift and go to state 27
+
+
+state 17
+
+    (4) device -> DISPOSITIVO LBRACE . NAME RBRACE
+    (5) device -> DISPOSITIVO LBRACE . NAME COMMA NAME RBRACE
+
+    NAME            shift and go to state 28
+
+
+state 18
+
+    (6) device -> DISPOSITIVO COLON . LBRACE NAME RBRACE
+    (7) device -> DISPOSITIVO COLON . LBRACE NAME COMMA NAME RBRACE
+
+    LBRACE          shift and go to state 29
+
+
+state 19
+
+    (9) cmds -> cmds cmd . DOT
+
+    DOT             shift and go to state 30
+
+
+state 20
+
+    (8) cmds -> cmd DOT .
+
+    SET             reduce using rule 8 (cmds -> cmd DOT .)
+    SE              reduce using rule 8 (cmds -> cmd DOT .)
+    LIGAR           reduce using rule 8 (cmds -> cmd DOT .)
+    DESLIGAR        reduce using rule 8 (cmds -> cmd DOT .)
+    ENVIAR          reduce using rule 8 (cmds -> cmd DOT .)
+    $end            reduce using rule 8 (cmds -> cmd DOT .)
+
+
+state 21
+
+    (14) attrib -> SET NAME . EQUAL var
+
+    EQUAL           shift and go to state 31
+
+
+state 22
+
+    (18) obsact -> SE condition . ENTAO
+    (19) obsact -> SE condition . ENTAO act
+    (20) obsact -> SE condition . ENTAO act SENAO act
+
+    ENTAO           shift and go to state 32
+
+
+state 23
+
+    (21) condition -> expression .
+    (23) expression -> expression . AND expression
+
+    ENTAO           reduce using rule 21 (condition -> expression .)
+    AND             shift and go to state 33
+
+
+state 24
+
+    (22) expression -> NAME . OPLOGIC var
+
+    OPLOGIC         shift and go to state 34
+
+
+state 25
+
+    (24) act -> LIGAR NAME .
+
+    DOT             reduce using rule 24 (act -> LIGAR NAME .)
+    SENAO           reduce using rule 24 (act -> LIGAR NAME .)
+
+
+state 26
+
+    (25) act -> DESLIGAR NAME .
+
+    DOT             reduce using rule 25 (act -> DESLIGAR NAME .)
+    SENAO           reduce using rule 25 (act -> DESLIGAR NAME .)
+
+
+state 27
+
+    (26) act -> ENVIAR ALERTA . LPAREN MSG COMMA NAME RPAREN PARA NAME
+    (27) act -> ENVIAR ALERTA . LPAREN MSG RPAREN PARA NAME
+    (28) broadcast -> ENVIAR ALERTA . LPAREN MSG RPAREN PARA TODOS COLON name_list
+    (29) broadcast -> ENVIAR ALERTA . LPAREN MSG COMMA NAME RPAREN PARA TODOS COLON name_list
+
+    LPAREN          shift and go to state 35
+
+
+state 28
+
+    (4) device -> DISPOSITIVO LBRACE NAME . RBRACE
+    (5) device -> DISPOSITIVO LBRACE NAME . COMMA NAME RBRACE
+
+    RBRACE          shift and go to state 36
+    COMMA           shift and go to state 37
+
+
+state 29
+
+    (6) device -> DISPOSITIVO COLON LBRACE . NAME RBRACE
+    (7) device -> DISPOSITIVO COLON LBRACE . NAME COMMA NAME RBRACE
+
+    NAME            shift and go to state 38
+
+
+state 30
+
+    (9) cmds -> cmds cmd DOT .
+
+    SET             reduce using rule 9 (cmds -> cmds cmd DOT .)
+    SE              reduce using rule 9 (cmds -> cmds cmd DOT .)
+    LIGAR           reduce using rule 9 (cmds -> cmds cmd DOT .)
+    DESLIGAR        reduce using rule 9 (cmds -> cmds cmd DOT .)
+    ENVIAR          reduce using rule 9 (cmds -> cmds cmd DOT .)
+    $end            reduce using rule 9 (cmds -> cmds cmd DOT .)
+
+
+state 31
+
+    (14) attrib -> SET NAME EQUAL . var
+    (15) var -> . NUMBER
+    (16) var -> . BOOL
+    (17) var -> . NAME
+
+    NUMBER          shift and go to state 41
+    BOOL            shift and go to state 42
+    NAME            shift and go to state 39
+
+    var                            shift and go to state 40
+
+state 32
+
+    (18) obsact -> SE condition ENTAO .
+    (19) obsact -> SE condition ENTAO . act
+    (20) obsact -> SE condition ENTAO . act SENAO act
+    (24) act -> . LIGAR NAME
+    (25) act -> . DESLIGAR NAME
+    (26) act -> . ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA NAME
+    (27) act -> . ENVIAR ALERTA LPAREN MSG RPAREN PARA NAME
+
+    DOT             reduce using rule 18 (obsact -> SE condition ENTAO .)
+    LIGAR           shift and go to state 14
+    DESLIGAR        shift and go to state 15
+    ENVIAR          shift and go to state 44
+
+    act                            shift and go to state 43
+
+state 33
+
+    (23) expression -> expression AND . expression
+    (22) expression -> . NAME OPLOGIC var
+    (23) expression -> . expression AND expression
+
+    NAME            shift and go to state 24
+
+    expression                     shift and go to state 45
+
+state 34
+
+    (22) expression -> NAME OPLOGIC . var
+    (15) var -> . NUMBER
+    (16) var -> . BOOL
+    (17) var -> . NAME
+
+    NUMBER          shift and go to state 41
+    BOOL            shift and go to state 42
+    NAME            shift and go to state 39
+
+    var                            shift and go to state 46
+
+state 35
+
+    (26) act -> ENVIAR ALERTA LPAREN . MSG COMMA NAME RPAREN PARA NAME
+    (27) act -> ENVIAR ALERTA LPAREN . MSG RPAREN PARA NAME
+    (28) broadcast -> ENVIAR ALERTA LPAREN . MSG RPAREN PARA TODOS COLON name_list
+    (29) broadcast -> ENVIAR ALERTA LPAREN . MSG COMMA NAME RPAREN PARA TODOS COLON name_list
+
+    MSG             shift and go to state 47
+
+
+state 36
+
+    (4) device -> DISPOSITIVO LBRACE NAME RBRACE .
+
+    DISPOSITIVO     reduce using rule 4 (device -> DISPOSITIVO LBRACE NAME RBRACE .)
+    SET             reduce using rule 4 (device -> DISPOSITIVO LBRACE NAME RBRACE .)
+    SE              reduce using rule 4 (device -> DISPOSITIVO LBRACE NAME RBRACE .)
+    LIGAR           reduce using rule 4 (device -> DISPOSITIVO LBRACE NAME RBRACE .)
+    DESLIGAR        reduce using rule 4 (device -> DISPOSITIVO LBRACE NAME RBRACE .)
+    ENVIAR          reduce using rule 4 (device -> DISPOSITIVO LBRACE NAME RBRACE .)
+
+
+state 37
+
+    (5) device -> DISPOSITIVO LBRACE NAME COMMA . NAME RBRACE
+
+    NAME            shift and go to state 48
+
+
+state 38
+
+    (6) device -> DISPOSITIVO COLON LBRACE NAME . RBRACE
+    (7) device -> DISPOSITIVO COLON LBRACE NAME . COMMA NAME RBRACE
+
+    RBRACE          shift and go to state 49
+    COMMA           shift and go to state 50
+
+
+state 39
+
+    (17) var -> NAME .
+
+    DOT             reduce using rule 17 (var -> NAME .)
+    AND             reduce using rule 17 (var -> NAME .)
+    ENTAO           reduce using rule 17 (var -> NAME .)
+
+
+state 40
+
+    (14) attrib -> SET NAME EQUAL var .
+
+    DOT             reduce using rule 14 (attrib -> SET NAME EQUAL var .)
+
+
+state 41
+
+    (15) var -> NUMBER .
+
+    DOT             reduce using rule 15 (var -> NUMBER .)
+    AND             reduce using rule 15 (var -> NUMBER .)
+    ENTAO           reduce using rule 15 (var -> NUMBER .)
+
+
+state 42
+
+    (16) var -> BOOL .
+
+    DOT             reduce using rule 16 (var -> BOOL .)
+    AND             reduce using rule 16 (var -> BOOL .)
+    ENTAO           reduce using rule 16 (var -> BOOL .)
+
+
+state 43
+
+    (19) obsact -> SE condition ENTAO act .
+    (20) obsact -> SE condition ENTAO act . SENAO act
+
+    DOT             reduce using rule 19 (obsact -> SE condition ENTAO act .)
+    SENAO           shift and go to state 51
+
+
+state 44
+
+    (26) act -> ENVIAR . ALERTA LPAREN MSG COMMA NAME RPAREN PARA NAME
+    (27) act -> ENVIAR . ALERTA LPAREN MSG RPAREN PARA NAME
+
+    ALERTA          shift and go to state 52
+
+
+state 45
+
+    (23) expression -> expression AND expression .
+    (23) expression -> expression . AND expression
+
+  ! shift/reduce conflict for AND resolved as shift
+    ENTAO           reduce using rule 23 (expression -> expression AND expression .)
+    AND             shift and go to state 33
+
+  ! AND             [ reduce using rule 23 (expression -> expression AND expression .) ]
+
+
+state 46
+
+    (22) expression -> NAME OPLOGIC var .
+
+    AND             reduce using rule 22 (expression -> NAME OPLOGIC var .)
+    ENTAO           reduce using rule 22 (expression -> NAME OPLOGIC var .)
+
+
+state 47
+
+    (26) act -> ENVIAR ALERTA LPAREN MSG . COMMA NAME RPAREN PARA NAME
+    (27) act -> ENVIAR ALERTA LPAREN MSG . RPAREN PARA NAME
+    (28) broadcast -> ENVIAR ALERTA LPAREN MSG . RPAREN PARA TODOS COLON name_list
+    (29) broadcast -> ENVIAR ALERTA LPAREN MSG . COMMA NAME RPAREN PARA TODOS COLON name_list
+
+    COMMA           shift and go to state 53
+    RPAREN          shift and go to state 54
+
+
+state 48
+
+    (5) device -> DISPOSITIVO LBRACE NAME COMMA NAME . RBRACE
+
+    RBRACE          shift and go to state 55
+
+
+state 49
+
+    (6) device -> DISPOSITIVO COLON LBRACE NAME RBRACE .
+
+    DISPOSITIVO     reduce using rule 6 (device -> DISPOSITIVO COLON LBRACE NAME RBRACE .)
+    SET             reduce using rule 6 (device -> DISPOSITIVO COLON LBRACE NAME RBRACE .)
+    SE              reduce using rule 6 (device -> DISPOSITIVO COLON LBRACE NAME RBRACE .)
+    LIGAR           reduce using rule 6 (device -> DISPOSITIVO COLON LBRACE NAME RBRACE .)
+    DESLIGAR        reduce using rule 6 (device -> DISPOSITIVO COLON LBRACE NAME RBRACE .)
+    ENVIAR          reduce using rule 6 (device -> DISPOSITIVO COLON LBRACE NAME RBRACE .)
+
+
+state 50
+
+    (7) device -> DISPOSITIVO COLON LBRACE NAME COMMA . NAME RBRACE
+
+    NAME            shift and go to state 56
+
+
+state 51
+
+    (20) obsact -> SE condition ENTAO act SENAO . act
+    (24) act -> . LIGAR NAME
+    (25) act -> . DESLIGAR NAME
+    (26) act -> . ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA NAME
+    (27) act -> . ENVIAR ALERTA LPAREN MSG RPAREN PARA NAME
+
+    LIGAR           shift and go to state 14
+    DESLIGAR        shift and go to state 15
+    ENVIAR          shift and go to state 44
+
+    act                            shift and go to state 57
+
+state 52
+
+    (26) act -> ENVIAR ALERTA . LPAREN MSG COMMA NAME RPAREN PARA NAME
+    (27) act -> ENVIAR ALERTA . LPAREN MSG RPAREN PARA NAME
+
+    LPAREN          shift and go to state 58
+
+
+state 53
+
+    (26) act -> ENVIAR ALERTA LPAREN MSG COMMA . NAME RPAREN PARA NAME
+    (29) broadcast -> ENVIAR ALERTA LPAREN MSG COMMA . NAME RPAREN PARA TODOS COLON name_list
+
+    NAME            shift and go to state 59
+
+
+state 54
+
+    (27) act -> ENVIAR ALERTA LPAREN MSG RPAREN . PARA NAME
+    (28) broadcast -> ENVIAR ALERTA LPAREN MSG RPAREN . PARA TODOS COLON name_list
+
+    PARA            shift and go to state 60
+
+
+state 55
+
+    (5) device -> DISPOSITIVO LBRACE NAME COMMA NAME RBRACE .
+
+    DISPOSITIVO     reduce using rule 5 (device -> DISPOSITIVO LBRACE NAME COMMA NAME RBRACE .)
+    SET             reduce using rule 5 (device -> DISPOSITIVO LBRACE NAME COMMA NAME RBRACE .)
+    SE              reduce using rule 5 (device -> DISPOSITIVO LBRACE NAME COMMA NAME RBRACE .)
+    LIGAR           reduce using rule 5 (device -> DISPOSITIVO LBRACE NAME COMMA NAME RBRACE .)
+    DESLIGAR        reduce using rule 5 (device -> DISPOSITIVO LBRACE NAME COMMA NAME RBRACE .)
+    ENVIAR          reduce using rule 5 (device -> DISPOSITIVO LBRACE NAME COMMA NAME RBRACE .)
+
+
+state 56
+
+    (7) device -> DISPOSITIVO COLON LBRACE NAME COMMA NAME . RBRACE
+
+    RBRACE          shift and go to state 61
+
+
+state 57
+
+    (20) obsact -> SE condition ENTAO act SENAO act .
+
+    DOT             reduce using rule 20 (obsact -> SE condition ENTAO act SENAO act .)
+
+
+state 58
+
+    (26) act -> ENVIAR ALERTA LPAREN . MSG COMMA NAME RPAREN PARA NAME
+    (27) act -> ENVIAR ALERTA LPAREN . MSG RPAREN PARA NAME
+
+    MSG             shift and go to state 62
+
+
+state 59
+
+    (26) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME . RPAREN PARA NAME
+    (29) broadcast -> ENVIAR ALERTA LPAREN MSG COMMA NAME . RPAREN PARA TODOS COLON name_list
+
+    RPAREN          shift and go to state 63
+
+
+state 60
+
+    (27) act -> ENVIAR ALERTA LPAREN MSG RPAREN PARA . NAME
+    (28) broadcast -> ENVIAR ALERTA LPAREN MSG RPAREN PARA . TODOS COLON name_list
+
+    NAME            shift and go to state 64
+    TODOS           shift and go to state 65
+
+
+state 61
+
+    (7) device -> DISPOSITIVO COLON LBRACE NAME COMMA NAME RBRACE .
+
+    DISPOSITIVO     reduce using rule 7 (device -> DISPOSITIVO COLON LBRACE NAME COMMA NAME RBRACE .)
+    SET             reduce using rule 7 (device -> DISPOSITIVO COLON LBRACE NAME COMMA NAME RBRACE .)
+    SE              reduce using rule 7 (device -> DISPOSITIVO COLON LBRACE NAME COMMA NAME RBRACE .)
+    LIGAR           reduce using rule 7 (device -> DISPOSITIVO COLON LBRACE NAME COMMA NAME RBRACE .)
+    DESLIGAR        reduce using rule 7 (device -> DISPOSITIVO COLON LBRACE NAME COMMA NAME RBRACE .)
+    ENVIAR          reduce using rule 7 (device -> DISPOSITIVO COLON LBRACE NAME COMMA NAME RBRACE .)
+
+
+state 62
+
+    (26) act -> ENVIAR ALERTA LPAREN MSG . COMMA NAME RPAREN PARA NAME
+    (27) act -> ENVIAR ALERTA LPAREN MSG . RPAREN PARA NAME
+
+    COMMA           shift and go to state 66
+    RPAREN          shift and go to state 67
+
+
+state 63
+
+    (26) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN . PARA NAME
+    (29) broadcast -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN . PARA TODOS COLON name_list
+
+    PARA            shift and go to state 68
+
+
+state 64
+
+    (27) act -> ENVIAR ALERTA LPAREN MSG RPAREN PARA NAME .
+
+    DOT             reduce using rule 27 (act -> ENVIAR ALERTA LPAREN MSG RPAREN PARA NAME .)
+    SENAO           reduce using rule 27 (act -> ENVIAR ALERTA LPAREN MSG RPAREN PARA NAME .)
+
+
+state 65
+
+    (28) broadcast -> ENVIAR ALERTA LPAREN MSG RPAREN PARA TODOS . COLON name_list
+
+    COLON           shift and go to state 69
+
+
+state 66
+
+    (26) act -> ENVIAR ALERTA LPAREN MSG COMMA . NAME RPAREN PARA NAME
+
+    NAME            shift and go to state 70
+
+
+state 67
+
+    (27) act -> ENVIAR ALERTA LPAREN MSG RPAREN . PARA NAME
+
+    PARA            shift and go to state 71
+
+
+state 68
+
+    (26) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA . NAME
+    (29) broadcast -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA . TODOS COLON name_list
+
+    NAME            shift and go to state 72
+    TODOS           shift and go to state 73
+
+
+state 69
+
+    (28) broadcast -> ENVIAR ALERTA LPAREN MSG RPAREN PARA TODOS COLON . name_list
+    (30) name_list -> . NAME
+    (31) name_list -> . name_list COMMA NAME
+
+    NAME            shift and go to state 75
+
+    name_list                      shift and go to state 74
+
+state 70
+
+    (26) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME . RPAREN PARA NAME
+
+    RPAREN          shift and go to state 76
+
+
+state 71
+
+    (27) act -> ENVIAR ALERTA LPAREN MSG RPAREN PARA . NAME
+
+    NAME            shift and go to state 64
+
+
+state 72
+
+    (26) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA NAME .
+
+    DOT             reduce using rule 26 (act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA NAME .)
+    SENAO           reduce using rule 26 (act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA NAME .)
+
+
+state 73
+
+    (29) broadcast -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA TODOS . COLON name_list
+
+    COLON           shift and go to state 77
+
+
+state 74
+
+    (28) broadcast -> ENVIAR ALERTA LPAREN MSG RPAREN PARA TODOS COLON name_list .
+    (31) name_list -> name_list . COMMA NAME
+
+    DOT             reduce using rule 28 (broadcast -> ENVIAR ALERTA LPAREN MSG RPAREN PARA TODOS COLON name_list .)
+    COMMA           shift and go to state 78
+
+
+state 75
+
+    (30) name_list -> NAME .
+
+    COMMA           reduce using rule 30 (name_list -> NAME .)
+    DOT             reduce using rule 30 (name_list -> NAME .)
+
+
+state 76
+
+    (26) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN . PARA NAME
+
+    PARA            shift and go to state 79
+
+
+state 77
+
+    (29) broadcast -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA TODOS COLON . name_list
+    (30) name_list -> . NAME
+    (31) name_list -> . name_list COMMA NAME
+
+    NAME            shift and go to state 75
+
+    name_list                      shift and go to state 80
+
+state 78
+
+    (31) name_list -> name_list COMMA . NAME
+
+    NAME            shift and go to state 81
+
+
+state 79
+
+    (26) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA . NAME
+
+    NAME            shift and go to state 72
+
+
+state 80
+
+    (29) broadcast -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA TODOS COLON name_list .
+    (31) name_list -> name_list . COMMA NAME
+
+    DOT             reduce using rule 29 (broadcast -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA TODOS COLON name_list .)
+    COMMA           shift and go to state 78
+
+
+state 81
+
+    (31) name_list -> name_list COMMA NAME .
+
+    COMMA           reduce using rule 31 (name_list -> name_list COMMA NAME .)
+    DOT             reduce using rule 31 (name_list -> name_list COMMA NAME .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for AND in state 45 resolved as shift
