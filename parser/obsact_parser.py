@@ -105,14 +105,17 @@ def p_cmds(p):
     # p[2] ou p[3] já adicionam o stmt
 
 def p_cmd(p):
-    # Especificação:
-    #   - Gramática: cmd -> attrib | obsact | act | broadcast
-    #   - Efeito: chama sub-produções que geram c_statements
     '''cmd : attrib
            | obsact
            | act
            | broadcast'''
-    # cada uma das sub-produções já faz c_statements.append()
+    # p[1] vem de:
+    #  - attrib: já fez c_statements.append() e retorna None
+    #  - obsact: idem
+    #  - broadcast: idem
+    #  - act: retorna a string da chamada C mas não appendou
+    if p[1]:
+        c_statements.append(p[1])
 
 # atribuição
 def p_attrib(p):
@@ -207,6 +210,7 @@ def p_act_ligar(p):
     #   - Retorno: p[0] = 'ligar("dev");'
     'act : LIGAR NAME'
     p[0] = f'ligar("{p[2]}");'
+    
 
 def p_act_desligar(p):
     # Especificação:
@@ -214,7 +218,8 @@ def p_act_desligar(p):
     #   - p[2]: dispositivo
     #   - Retorno: p[0] = 'desligar("dev");'
     'act : DESLIGAR NAME'
-    p[0] = f'desligar("{p[2]}");'
+    stmt = f'desligar("{p[2]}");'
+    c_statements.append(stmt)
 
 # enviar alerta simples ou com var
 def p_act_alerta_var(p):

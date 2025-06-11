@@ -10,7 +10,6 @@ int main() {
     int temperatura = 0;
     int potencia = 0;
 
-    temperatura = 40;
     potencia = 90;
     if (temperatura > 30) { ligar("ventilador"); }
 

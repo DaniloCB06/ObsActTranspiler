@@ -1,2 +1,2 @@
 dispositivo : { Celular }
-enviar alerta (" Hora de acordar !") Celular
+enviar alerta ("Hora de acordar !") para Celular.
