@@ -292,6 +292,24 @@ def p_name_list_rec(p):
     #   - Retorno: p[0] = p[1] + [p[3]]
     'name_list : name_list COMMA NAME'
     p[0] = p[1] + [p[3]]
+    
+def p_act_alerta_no_para(p):
+    # Especificação:
+    #   - Gramática: name_list -> NAME
+    #   - p[1]: nome
+    #   - Retorno: p[0] = [p[1]]
+    'act : ENVIAR ALERTA LPAREN MSG RPAREN NAME'
+    msg, dev = p[4], p[6]
+    p[0] = f'alerta("{dev}", "{msg}");'
+
+def p_act_alerta_var_no_para(p):
+    # Especificação:
+    #   - Gramática: name_list -> name_list COMMA NAME
+    #   - p[1]: lista atual, p[3]: próximo dispositivo
+    #   - Retorno: p[0] = p[1] + [p[3]]
+    'act : ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN NAME'
+    msg, var, dev = p[4], p[6], p[8]
+    p[0] = f'alerta_var("{dev}", "{msg}", {var});'
 
 # erro de sintaxe
 def p_error(p):

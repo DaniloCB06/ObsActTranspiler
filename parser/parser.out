@@ -34,30 +34,32 @@ Rule 28    broadcast -> ENVIAR ALERTA LPAREN MSG RPAREN PARA TODOS COLON name_li
 Rule 29    broadcast -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA TODOS COLON name_list
 Rule 30    name_list -> NAME
 Rule 31    name_list -> name_list COMMA NAME
+Rule 32    act -> ENVIAR ALERTA LPAREN MSG RPAREN NAME
+Rule 33    act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN NAME
 
 Terminals, with rules where they appear
 
-ALERTA               : 26 27 28 29
+ALERTA               : 26 27 28 29 32 33
 AND                  : 23
 BOOL                 : 16
 COLON                : 6 7 28 29
-COMMA                : 5 7 26 29 31
+COMMA                : 5 7 26 29 31 33
 DESLIGAR             : 25
 DISPOSITIVO          : 4 5 6 7
 DOT                  : 8 9
 ENTAO                : 18 19 20
-ENVIAR               : 26 27 28 29
+ENVIAR               : 26 27 28 29 32 33
 EQUAL                : 14
 LBRACE               : 4 5 6 7
 LIGAR                : 24
-LPAREN               : 26 27 28 29
-MSG                  : 26 27 28 29
-NAME                 : 4 5 5 6 7 7 14 17 22 24 25 26 26 27 29 30 31
+LPAREN               : 26 27 28 29 32 33
+MSG                  : 26 27 28 29 32 33
+NAME                 : 4 5 5 6 7 7 14 17 22 24 25 26 26 27 29 30 31 32 33 33
 NUMBER               : 15
 OPLOGIC              : 22
 PARA                 : 26 27 28 29
 RBRACE               : 4 5 6 7
-RPAREN               : 26 27 28 29
+RPAREN               : 26 27 28 29 32 33
 SE                   : 18 19 20
 SENAO                : 20
 SET                  : 14
@@ -127,6 +129,8 @@ state 2
     (25) act -> . DESLIGAR NAME
     (26) act -> . ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA NAME
     (27) act -> . ENVIAR ALERTA LPAREN MSG RPAREN PARA NAME
+    (32) act -> . ENVIAR ALERTA LPAREN MSG RPAREN NAME
+    (33) act -> . ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN NAME
     (28) broadcast -> . ENVIAR ALERTA LPAREN MSG RPAREN PARA TODOS COLON name_list
     (29) broadcast -> . ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA TODOS COLON name_list
 
@@ -184,6 +188,8 @@ state 5
     (25) act -> . DESLIGAR NAME
     (26) act -> . ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA NAME
     (27) act -> . ENVIAR ALERTA LPAREN MSG RPAREN PARA NAME
+    (32) act -> . ENVIAR ALERTA LPAREN MSG RPAREN NAME
+    (33) act -> . ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN NAME
     (28) broadcast -> . ENVIAR ALERTA LPAREN MSG RPAREN PARA TODOS COLON name_list
     (29) broadcast -> . ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA TODOS COLON name_list
 
@@ -286,6 +292,8 @@ state 16
 
     (26) act -> ENVIAR . ALERTA LPAREN MSG COMMA NAME RPAREN PARA NAME
     (27) act -> ENVIAR . ALERTA LPAREN MSG RPAREN PARA NAME
+    (32) act -> ENVIAR . ALERTA LPAREN MSG RPAREN NAME
+    (33) act -> ENVIAR . ALERTA LPAREN MSG COMMA NAME RPAREN NAME
     (28) broadcast -> ENVIAR . ALERTA LPAREN MSG RPAREN PARA TODOS COLON name_list
     (29) broadcast -> ENVIAR . ALERTA LPAREN MSG COMMA NAME RPAREN PARA TODOS COLON name_list
 
@@ -379,6 +387,8 @@ state 27
 
     (26) act -> ENVIAR ALERTA . LPAREN MSG COMMA NAME RPAREN PARA NAME
     (27) act -> ENVIAR ALERTA . LPAREN MSG RPAREN PARA NAME
+    (32) act -> ENVIAR ALERTA . LPAREN MSG RPAREN NAME
+    (33) act -> ENVIAR ALERTA . LPAREN MSG COMMA NAME RPAREN NAME
     (28) broadcast -> ENVIAR ALERTA . LPAREN MSG RPAREN PARA TODOS COLON name_list
     (29) broadcast -> ENVIAR ALERTA . LPAREN MSG COMMA NAME RPAREN PARA TODOS COLON name_list
 
@@ -436,6 +446,8 @@ state 32
     (25) act -> . DESLIGAR NAME
     (26) act -> . ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA NAME
     (27) act -> . ENVIAR ALERTA LPAREN MSG RPAREN PARA NAME
+    (32) act -> . ENVIAR ALERTA LPAREN MSG RPAREN NAME
+    (33) act -> . ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN NAME
 
     DOT             reduce using rule 18 (obsact -> SE condition ENTAO .)
     LIGAR           shift and go to state 14
@@ -471,6 +483,8 @@ state 35
 
     (26) act -> ENVIAR ALERTA LPAREN . MSG COMMA NAME RPAREN PARA NAME
     (27) act -> ENVIAR ALERTA LPAREN . MSG RPAREN PARA NAME
+    (32) act -> ENVIAR ALERTA LPAREN . MSG RPAREN NAME
+    (33) act -> ENVIAR ALERTA LPAREN . MSG COMMA NAME RPAREN NAME
     (28) broadcast -> ENVIAR ALERTA LPAREN . MSG RPAREN PARA TODOS COLON name_list
     (29) broadcast -> ENVIAR ALERTA LPAREN . MSG COMMA NAME RPAREN PARA TODOS COLON name_list
 
@@ -552,6 +566,8 @@ state 44
 
     (26) act -> ENVIAR . ALERTA LPAREN MSG COMMA NAME RPAREN PARA NAME
     (27) act -> ENVIAR . ALERTA LPAREN MSG RPAREN PARA NAME
+    (32) act -> ENVIAR . ALERTA LPAREN MSG RPAREN NAME
+    (33) act -> ENVIAR . ALERTA LPAREN MSG COMMA NAME RPAREN NAME
 
     ALERTA          shift and go to state 52
 
@@ -580,6 +596,8 @@ state 47
 
     (26) act -> ENVIAR ALERTA LPAREN MSG . COMMA NAME RPAREN PARA NAME
     (27) act -> ENVIAR ALERTA LPAREN MSG . RPAREN PARA NAME
+    (32) act -> ENVIAR ALERTA LPAREN MSG . RPAREN NAME
+    (33) act -> ENVIAR ALERTA LPAREN MSG . COMMA NAME RPAREN NAME
     (28) broadcast -> ENVIAR ALERTA LPAREN MSG . RPAREN PARA TODOS COLON name_list
     (29) broadcast -> ENVIAR ALERTA LPAREN MSG . COMMA NAME RPAREN PARA TODOS COLON name_list
 
@@ -620,6 +638,8 @@ state 51
     (25) act -> . DESLIGAR NAME
     (26) act -> . ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA NAME
     (27) act -> . ENVIAR ALERTA LPAREN MSG RPAREN PARA NAME
+    (32) act -> . ENVIAR ALERTA LPAREN MSG RPAREN NAME
+    (33) act -> . ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN NAME
 
     LIGAR           shift and go to state 14
     DESLIGAR        shift and go to state 15
@@ -631,6 +651,8 @@ state 52
 
     (26) act -> ENVIAR ALERTA . LPAREN MSG COMMA NAME RPAREN PARA NAME
     (27) act -> ENVIAR ALERTA . LPAREN MSG RPAREN PARA NAME
+    (32) act -> ENVIAR ALERTA . LPAREN MSG RPAREN NAME
+    (33) act -> ENVIAR ALERTA . LPAREN MSG COMMA NAME RPAREN NAME
 
     LPAREN          shift and go to state 58
 
@@ -638,6 +660,7 @@ state 52
 state 53
 
     (26) act -> ENVIAR ALERTA LPAREN MSG COMMA . NAME RPAREN PARA NAME
+    (33) act -> ENVIAR ALERTA LPAREN MSG COMMA . NAME RPAREN NAME
     (29) broadcast -> ENVIAR ALERTA LPAREN MSG COMMA . NAME RPAREN PARA TODOS COLON name_list
 
     NAME            shift and go to state 59
@@ -646,9 +669,11 @@ state 53
 state 54
 
     (27) act -> ENVIAR ALERTA LPAREN MSG RPAREN . PARA NAME
+    (32) act -> ENVIAR ALERTA LPAREN MSG RPAREN . NAME
     (28) broadcast -> ENVIAR ALERTA LPAREN MSG RPAREN . PARA TODOS COLON name_list
 
     PARA            shift and go to state 60
+    NAME            shift and go to state 61
 
 
 state 55
@@ -667,7 +692,7 @@ state 56
 
     (7) device -> DISPOSITIVO COLON LBRACE NAME COMMA NAME . RBRACE
 
-    RBRACE          shift and go to state 61
+    RBRACE          shift and go to state 62
 
 
 state 57
@@ -681,16 +706,19 @@ state 58
 
     (26) act -> ENVIAR ALERTA LPAREN . MSG COMMA NAME RPAREN PARA NAME
     (27) act -> ENVIAR ALERTA LPAREN . MSG RPAREN PARA NAME
+    (32) act -> ENVIAR ALERTA LPAREN . MSG RPAREN NAME
+    (33) act -> ENVIAR ALERTA LPAREN . MSG COMMA NAME RPAREN NAME
 
-    MSG             shift and go to state 62
+    MSG             shift and go to state 63
 
 
 state 59
 
     (26) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME . RPAREN PARA NAME
+    (33) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME . RPAREN NAME
     (29) broadcast -> ENVIAR ALERTA LPAREN MSG COMMA NAME . RPAREN PARA TODOS COLON name_list
 
-    RPAREN          shift and go to state 63
+    RPAREN          shift and go to state 64
 
 
 state 60
@@ -698,11 +726,19 @@ state 60
     (27) act -> ENVIAR ALERTA LPAREN MSG RPAREN PARA . NAME
     (28) broadcast -> ENVIAR ALERTA LPAREN MSG RPAREN PARA . TODOS COLON name_list
 
-    NAME            shift and go to state 64
-    TODOS           shift and go to state 65
+    NAME            shift and go to state 65
+    TODOS           shift and go to state 66
 
 
 state 61
+
+    (32) act -> ENVIAR ALERTA LPAREN MSG RPAREN NAME .
+
+    DOT             reduce using rule 32 (act -> ENVIAR ALERTA LPAREN MSG RPAREN NAME .)
+    SENAO           reduce using rule 32 (act -> ENVIAR ALERTA LPAREN MSG RPAREN NAME .)
+
+
+state 62
 
     (7) device -> DISPOSITIVO COLON LBRACE NAME COMMA NAME RBRACE .
 
@@ -714,24 +750,28 @@ state 61
     ENVIAR          reduce using rule 7 (device -> DISPOSITIVO COLON LBRACE NAME COMMA NAME RBRACE .)
 
 
-state 62
+state 63
 
     (26) act -> ENVIAR ALERTA LPAREN MSG . COMMA NAME RPAREN PARA NAME
     (27) act -> ENVIAR ALERTA LPAREN MSG . RPAREN PARA NAME
+    (32) act -> ENVIAR ALERTA LPAREN MSG . RPAREN NAME
+    (33) act -> ENVIAR ALERTA LPAREN MSG . COMMA NAME RPAREN NAME
 
-    COMMA           shift and go to state 66
-    RPAREN          shift and go to state 67
-
-
-state 63
-
-    (26) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN . PARA NAME
-    (29) broadcast -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN . PARA TODOS COLON name_list
-
-    PARA            shift and go to state 68
+    COMMA           shift and go to state 67
+    RPAREN          shift and go to state 68
 
 
 state 64
+
+    (26) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN . PARA NAME
+    (33) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN . NAME
+    (29) broadcast -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN . PARA TODOS COLON name_list
+
+    PARA            shift and go to state 70
+    NAME            shift and go to state 69
+
+
+state 65
 
     (27) act -> ENVIAR ALERTA LPAREN MSG RPAREN PARA NAME .
 
@@ -739,61 +779,73 @@ state 64
     SENAO           reduce using rule 27 (act -> ENVIAR ALERTA LPAREN MSG RPAREN PARA NAME .)
 
 
-state 65
+state 66
 
     (28) broadcast -> ENVIAR ALERTA LPAREN MSG RPAREN PARA TODOS . COLON name_list
 
-    COLON           shift and go to state 69
-
-
-state 66
-
-    (26) act -> ENVIAR ALERTA LPAREN MSG COMMA . NAME RPAREN PARA NAME
-
-    NAME            shift and go to state 70
+    COLON           shift and go to state 71
 
 
 state 67
 
-    (27) act -> ENVIAR ALERTA LPAREN MSG RPAREN . PARA NAME
+    (26) act -> ENVIAR ALERTA LPAREN MSG COMMA . NAME RPAREN PARA NAME
+    (33) act -> ENVIAR ALERTA LPAREN MSG COMMA . NAME RPAREN NAME
 
-    PARA            shift and go to state 71
+    NAME            shift and go to state 72
 
 
 state 68
 
-    (26) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA . NAME
-    (29) broadcast -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA . TODOS COLON name_list
+    (27) act -> ENVIAR ALERTA LPAREN MSG RPAREN . PARA NAME
+    (32) act -> ENVIAR ALERTA LPAREN MSG RPAREN . NAME
 
-    NAME            shift and go to state 72
-    TODOS           shift and go to state 73
+    PARA            shift and go to state 73
+    NAME            shift and go to state 61
 
 
 state 69
+
+    (33) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN NAME .
+
+    DOT             reduce using rule 33 (act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN NAME .)
+    SENAO           reduce using rule 33 (act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN NAME .)
+
+
+state 70
+
+    (26) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA . NAME
+    (29) broadcast -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA . TODOS COLON name_list
+
+    NAME            shift and go to state 74
+    TODOS           shift and go to state 75
+
+
+state 71
 
     (28) broadcast -> ENVIAR ALERTA LPAREN MSG RPAREN PARA TODOS COLON . name_list
     (30) name_list -> . NAME
     (31) name_list -> . name_list COMMA NAME
 
-    NAME            shift and go to state 75
+    NAME            shift and go to state 77
 
-    name_list                      shift and go to state 74
+    name_list                      shift and go to state 76
 
-state 70
+state 72
 
     (26) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME . RPAREN PARA NAME
+    (33) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME . RPAREN NAME
 
-    RPAREN          shift and go to state 76
+    RPAREN          shift and go to state 78
 
 
-state 71
+state 73
 
     (27) act -> ENVIAR ALERTA LPAREN MSG RPAREN PARA . NAME
 
-    NAME            shift and go to state 64
+    NAME            shift and go to state 65
 
 
-state 72
+state 74
 
     (26) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA NAME .
 
@@ -801,23 +853,23 @@ state 72
     SENAO           reduce using rule 26 (act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA NAME .)
 
 
-state 73
+state 75
 
     (29) broadcast -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA TODOS . COLON name_list
 
-    COLON           shift and go to state 77
+    COLON           shift and go to state 79
 
 
-state 74
+state 76
 
     (28) broadcast -> ENVIAR ALERTA LPAREN MSG RPAREN PARA TODOS COLON name_list .
     (31) name_list -> name_list . COMMA NAME
 
     DOT             reduce using rule 28 (broadcast -> ENVIAR ALERTA LPAREN MSG RPAREN PARA TODOS COLON name_list .)
-    COMMA           shift and go to state 78
+    COMMA           shift and go to state 80
 
 
-state 75
+state 77
 
     (30) name_list -> NAME .
 
@@ -825,47 +877,49 @@ state 75
     DOT             reduce using rule 30 (name_list -> NAME .)
 
 
-state 76
+state 78
 
     (26) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN . PARA NAME
+    (33) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN . NAME
 
-    PARA            shift and go to state 79
+    PARA            shift and go to state 81
+    NAME            shift and go to state 69
 
 
-state 77
+state 79
 
     (29) broadcast -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA TODOS COLON . name_list
     (30) name_list -> . NAME
     (31) name_list -> . name_list COMMA NAME
 
-    NAME            shift and go to state 75
+    NAME            shift and go to state 77
 
-    name_list                      shift and go to state 80
+    name_list                      shift and go to state 82
 
-state 78
+state 80
 
     (31) name_list -> name_list COMMA . NAME
 
-    NAME            shift and go to state 81
+    NAME            shift and go to state 83
 
 
-state 79
+state 81
 
     (26) act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA . NAME
 
-    NAME            shift and go to state 72
+    NAME            shift and go to state 74
 
 
-state 80
+state 82
 
     (29) broadcast -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA TODOS COLON name_list .
     (31) name_list -> name_list . COMMA NAME
 
     DOT             reduce using rule 29 (broadcast -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA TODOS COLON name_list .)
-    COMMA           shift and go to state 78
+    COMMA           shift and go to state 80
 
 
-state 81
+state 83
 
     (31) name_list -> name_list COMMA NAME .
 
