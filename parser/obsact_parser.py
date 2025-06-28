@@ -318,7 +318,8 @@ def p_error(p):
     #   - p: token que causou o erro ou None no EOF
     #   - Efeito: imprime mensagem de erro
     if p:
-        print(f"Syntax error perto de {p.value!r}")
+        print(f"Syntax error detectado perto de {p.value!r} (erro presente antes ou depois)")
+        print(f"Reavalie o arquivo e tente detectar alguma regra faltante ou alguma syntaxe mal definida")
     else:
         print("Syntax error no fim de arquivo")
 
