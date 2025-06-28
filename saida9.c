@@ -7,13 +7,16 @@ void alerta(const char* dev, const char* msg);
 void alerta_var(const char* dev, const char* msg, int var);
 
 int main() {
-    int movimento = 0;
-    int umidade = 0;
-    int potencia = 0;
+    int abertura = 0;
+    int alarme = 0;
 
-    potencia = 100;
-    if (umidade < 40) { alerta("Monitor", "Ar seco detectado"); }
-    if (movimento == 1) { ligar("lampada"); } else { desligar("lampada"); }
+    abertura = 0;
+    alarme = 0;
+    if (abertura == 1) { alerta("janela", "Janela aberta!"); }
+    if (alarme >= 1) { ligar("sirene"); } else { desligar("sirene"); }
+    alerta_var("termostato", "Status geral", alarme);
+    alerta_var("janela", "Status geral", alarme);
+    alerta_var("sirene", "Status geral", alarme);
 
     return 0;
 }

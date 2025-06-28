@@ -218,8 +218,7 @@ def p_act_desligar(p):
     #   - p[2]: dispositivo
     #   - Retorno: p[0] = 'desligar("dev");'
     'act : DESLIGAR NAME'
-    stmt = f'desligar("{p[2]}");'
-    c_statements.append(stmt)
+    p[0] = f'desligar("{p[2]}");'
 
 # enviar alerta simples ou com var
 def p_act_alerta_var(p):
