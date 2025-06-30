@@ -124,6 +124,8 @@ def p_attrib(p):
     #   - p[2]: variável, p[4]: valor string
     #   - Efeito: adiciona "var = valor;" a c_statements
     'attrib : SET NAME EQUAL var'
+    if p[2] not in observation_list:
+        observation_list.append(p[2])
     c_statements.append(f'{p[2]} = {p[4]};')
 
 # variável (número, bool, nome)
@@ -239,6 +241,32 @@ def p_act_alerta(p):
     msg, dev = p[4], p[7]
     p[0] = f'alerta("{dev}", "{msg}");'
 
+def p_act_broadcast(p):
+    'act : ENVIAR ALERTA LPAREN MSG RPAREN PARA TODOS COLON name_list'
+    # Especificação:
+    #   - Gramática: act -> ENVIAR ALERTA LPAREN MSG RPAREN PARA TODOS COLON name_list
+    #   - p[4]: mensagem (token MSG)
+    #   - p[9]: lista de dispositivos (name_list já construída)
+    #   - Retorno: p[0] = sequência única de chamadas
+    #              'alerta("dev1", "mensagem"); alerta("dev2", "mensagem"); ...'
+    msg = p[4]
+    alerts = ' '.join([f'alerta("{dev}", "{msg}");' for dev in p[9]])
+    p[0] = alerts
+
+    
+def p_act_broadcast_var(p):
+    'act : ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA TODOS COLON name_list'
+    # Especificação:
+    #   - Gramática: act -> ENVIAR ALERTA LPAREN MSG COMMA NAME RPAREN PARA TODOS COLON name_list
+    #   - p[4]: mensagem (token MSG)
+    #   - p[6]: variável cujo valor será incluído no alerta
+    #   - p[11]: lista de dispositivos (name_list)
+    #   - Retorno: p[0] = sequência única de chamadas
+    #              'alerta_var("dev1", "mensagem", var); alerta_var("dev2", "mensagem", var); ...'
+    msg, var = p[4], p[6]
+    alerts = ' '.join([f'alerta_var("{dev}", "{msg}", {var});' for dev in p[11]])
+    p[0] = alerts
+
 # broadcast
 def p_broadcast(p):
     # Especificação:
@@ -247,7 +275,7 @@ def p_broadcast(p):
       #   - Efeitos:
       #       Se last_condition, envolve em if e reseta;
       #       Senão, emite alertas diretos.
-    'broadcast : ENVIAR ALERTA LPAREN MSG RPAREN PARA TODOS COLON name_list'
+
     msg = p[5]
     global last_condition
     if last_condition:
